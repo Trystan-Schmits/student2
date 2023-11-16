@@ -76,6 +76,7 @@ export class Player extends Character{
 
     // Player perform a unique update
     update() {
+        console.log(this.x)
         if (this.isAnimation(PlayerAnimation.a)) {
             this.x -= this.speed;  // Move to left
         }

@@ -3,6 +3,7 @@ import GameEnv from './GameEnv.js';
 class GameObject {
     // container for all game objects in game
     constructor(canvas, image, speedRatio) {
+        console.log("fired")
         this.x = 0;
         this.y = 0;
         this.frame = 0;
