@@ -3,7 +3,7 @@ import GameObject from './GameObject.js';
 
 const GoombaAnimation = {
     // Sprite properties
-    scale: 0.33,
+    scale: 0.1,
     width: 448,
     height: 452,
 }
@@ -24,13 +24,12 @@ export class Goomba extends GameObject{
         this.gravityEnabled = true;
         
         this.velocity = {
-            x: .1,
+            x: 1,
             y: 0
         }
     }
 
     draw() {
-        console.log("drawing Goomba")
         // Set fixed dimensions and position for the Character
         this.canvas.width = this.spriteWidth * this.spriteScale;
         this.canvas.height = this.spriteHeight * this.spriteScale;
@@ -70,7 +69,6 @@ export class Goomba extends GameObject{
     }
 
     update() {
-        console.log(this.x)
         this.x += this.velocity.x;
         if (GameEnv.bottom > this.y && this.gravityEnabled)
             this.y += GameEnv.gravity;
@@ -81,7 +79,12 @@ export class Goomba extends GameObject{
         } else {
             this.frameX = 0;
         }
-
+        if(0 > this.x){
+            this.velocity.x = 1;
+        }
+        else if(GameEnv.innerWidth < this.x+this.collisionWidth){
+            this.velocity.x = -1;
+        }
         this.collisionChecks();
     }
 }
