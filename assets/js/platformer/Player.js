@@ -173,15 +173,16 @@ export class Player extends Character{
         }
 
         if (this.collisionData.touchPoints.other.id === "enemy") {
-            if (this.y >= this.bottom){
+            if (this.y >= this.bottom){ //you died
+                //reload current level (death)
                 GameControl.transitionToLevel(GameEnv.levels[GameEnv.levels.indexOf(GameEnv.currentLevel)]);
             }
-            else{
-                this.y -= this.bottom*.2;
-                for(let i = 0; i<GameEnv.gameObjects.length;i++){
-                    if(GameEnv.gameObjects[i].isGoomba){
-                        GameEnv.gameObjects[i].canvas.remove();
-                        GameEnv.gameObjects.splice(i,1);
+            else{//you kill goomba
+                this.y -= this.bottom*.2;//bounce
+                for(let i = 0; i<GameEnv.gameObjects.length;i++){//loop through current gameObjects
+                    if(GameEnv.gameObjects[i].isGoomba){ //look for object with (isGoomba==true) tag
+                        GameEnv.gameObjects[i].canvas.remove(); //remove goomba sprite from current level
+                        GameEnv.gameObjects.splice(i,1); //remove goomba object from current level
                     }
                 }
             }
