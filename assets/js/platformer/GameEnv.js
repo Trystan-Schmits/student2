@@ -43,6 +43,9 @@ export class GameEnv {
         if (header) {
             this.top = header.offsetHeight;
         }
+        else{
+            this.top = 0;
+        }
     }
 
     // Setter for Bottom position
