@@ -1,5 +1,7 @@
 import GameEnv from './GameEnv.js';
 import Character from './Character.js';
+import GameControl from './GameControl.js';
+import Goomba from './Goomba.js';
 
 export class Player extends Character{
     // constructors sets up Character object 
@@ -168,6 +170,21 @@ export class Player extends Character{
             this.movement.down = true;
             this.gravityEnabled = true;
             
+        }
+
+        if (this.collisionData.touchPoints.other.id === "enemy") {
+            if (this.y >= this.bottom){
+                GameControl.transitionToLevel(GameEnv.levels[GameEnv.levels.indexOf(GameEnv.currentLevel)]);
+            }
+            else{
+                this.y -= this.bottom*.2;
+                for(let i = 0; i<GameEnv.gameObjects.length;i++){
+                    if(GameEnv.gameObjects[i].isGoomba){
+                        GameEnv.gameObjects[i].canvas.remove();
+                        GameEnv.gameObjects.splice(i,1);
+                    }
+                }
+            }
         }
     }
     
